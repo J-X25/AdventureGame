@@ -132,6 +132,48 @@ else if (currentLocation === "blacksmith") {
 }
 // Additional locations and choices can be added here following the same structure
 
+// Create main game loop that runs until player quits
+let gameRunning = true;
+while (gameRunning) {
+
+    // Location check and display 
+    if (currentLocation === "village") {
+        console.log("\n=== VILLAGE ===");
+        console.log("You're in a bustling village. The blacksmith and market are nearby.");
+        console.log("\nWhere would you like to go?");
+        console.log("1: Go to blacksmith");
+        console.log("2: Go to market");
+        console.log("3: Enter forest");
+        console.log("4: Check status");
+        console.log("5: Quit game");
+        
+        if (firstVisit) {
+            console.log("\nVillager: 'Welcome, adventurer! Rumor has it there's a dragon in the mountains...'");
+            firstVisit = false;
+        }
+    }
+    else if (currentLocation === "blacksmith") {
+        console.log("\n=== BLACKSMITH ===");
+        console.log("The heat from the forge fills the air. Weapons and armor line the walls.");
+        console.log("\nWhere would you like to go?");
+        console.log("1: Return to village");
+        console.log("2: Check status");
+        console.log("3: Quit game");
+    }
+    
+    // Get player choice
+    let choice = readline.question("\nEnter choice (number): ");
+    let choiceNum = parseInt(choice);
+
+
+
+
+
+
+}
+
+    // Game logic and player choices would go here
+    // For example, you could add more locations, combat encounters, and inventory management
 
     
     
