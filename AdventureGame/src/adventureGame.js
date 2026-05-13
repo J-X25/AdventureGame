@@ -173,30 +173,63 @@ while (gameRunning) {
         console.log("4: Quit game");
     }
 // Create battle loop for monster combat
-    if (currentLocation === "forest") {
+    else if (currentLocation === "forest") {
         console.log("\nYou venture into the forest. A wild goblin appears!");
-        let monsterHealth = 30;}
-        console.log("Monster Health: " + monsterHealth);
-        while (monsterHealth > 0 && playerHealth > 0) {
-            console.log("\nChoose your action:");
-            console.log("1: Attack");
-            console.log("2: Use healing potion");
-            console.log("3: Run away");
-            
-            let combatChoice = readline.question("\nEnter choice (number): ");
-            let combatChoiceNum = parseInt(combatChoice);
-            
-            if (combatChoiceNum === 1) {
-                // Attack action
-                let damageDealt = weaponDamage - monsterDefense;
-                if (damageDealt < 0) damageDealt = 0; // Prevent negative damage
-                monsterHealth -= damageDealt;
-                console.log("\nYou attack the goblin and deal " + damageDealt + " damage!");
-                console.log("Goblin's remaining health: " + monsterHealth);
-
-    
-    }        
+        let inBattle = true;
+        let monsterHealth = 3;}
+        console.log("Battle Stared!");
+        while (inBattle) {
+            console.log("Monaster Health: " + monsterHealth);
+            console.log("You attack!");
+            monsterHealth --;
+            if (monsterHealth <= 0) {
+                console.log("You defeated the goblin!");
+                inBattle = false;
+            }
+            currentLocation = "village"; // Return to village after battle
+            console.log("\nYou return to the village after the battle.");
+             
         }
 
+    }  
+    // Get player choice 
+    let choice = readline.question("\nEnter choice (number): ");
+    let choiceNum = parseInt(choice);
+
+    // Handle choices based on location
+    if (currentLocation === "village") {
+        if (choiceNum === 1) {
+            currentLocation = "blacksmith";
+            console.log("\nYou enter the blacksmith's shop.");
+        }
+    }
+    else if (choiceNum === 2) {
+             currentLocation = "market";
+             console.log("\nYou head to the market.");
 
     }
+    else if (choiceNum === 3) {
+            currentLocation = "forest";
+            console.log("\nYou venture into the forest.");
+    }   else if (choiceNum === 4) {
+        // Show status
+        console.log("\n=== " + playerName + "'s Status ===");
+        console.log("❤️  Health: " + playerHealth);
+        console.log("💰 Gold: " + playerGold);
+        console.log("📍 Location: " + currentLocation);
+    }
+    else if (choiceNum === 5) {
+        // Show inventory
+        for (let slot = 1; slot <= 3; slot++) {
+            console.log("Checking inventory slot " + slot + "...");
+            if (slot === 1 && hasWeapon) {
+                console.log("Found: Sword");
+        }
+    else if (slot === 2 && hasPotion) {
+            console.log("Found: Healing Potion");
+    }
+    else if (slot === 3 && hasArmor) {
+            console.log("Found: Shield");
+    }
+}
+    }   
