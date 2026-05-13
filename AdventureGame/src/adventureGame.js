@@ -230,6 +230,18 @@ while (gameRunning) {
     }
     else if (slot === 3 && hasArmor) {
             console.log("Found: Shield");
-    }
+    } else {
+            console.log("Empty slot");
+    } 
+    
 }
     }   
+else if (choiceNum === 6) {
+    gameRunning = false;
+    console.log("\nGoodbye, brave adventurer!");
+}   
+    // Check if player has died
+    if (playerHealth <= 0) {
+        console.log("\nYou have been defeated. Game over.");
+        gameRunning = false;
+    }
