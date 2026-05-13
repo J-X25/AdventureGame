@@ -52,9 +52,12 @@ console.log("You see a path leading to the forest and villagers going about thei
 let playerName = readline.question("What is your name, adventurer? ");
 console.log("Welcome, " + playerName + "! Your adventure begins now.");
 
-// Location tracking
+// Game state variables
 let currentLocation = "village";
 let firstVisit = true;
+let hasWeapon = false;
+let hasPotion = false;
+let hasArmor = false;
 
 // Location check and display
 if (currentLocation === "village") {
@@ -136,7 +139,7 @@ else if (currentLocation === "blacksmith") {
 let gameRunning = true;
 while (gameRunning) {
 
-    // Location check and display 
+// Location check and display 
     if (currentLocation === "village") {
         console.log("\n=== VILLAGE ===");
         console.log("You're in a bustling village. The blacksmith and market are nearby.");
@@ -160,25 +163,40 @@ while (gameRunning) {
         console.log("2: Check status");
         console.log("3: Quit game");
     }
+    else if (currentLocation === "market") {
+        console.log("\n=== MARKET ===");
+        console.log("Stalls filled with goods and merchants shouting their wares.");
+        console.log("\nWhere would you like to go?");
+        console.log("1: Return to village");
+        console.log("2: Check status");
+        console.log("3: Check inventory");
+        console.log("4: Quit game");
+    }
+// Create battle loop for monster combat
+    if (currentLocation === "forest") {
+        console.log("\nYou venture into the forest. A wild goblin appears!");
+        let monsterHealth = 30;}
+        console.log("Monster Health: " + monsterHealth);
+        while (monsterHealth > 0 && playerHealth > 0) {
+            console.log("\nChoose your action:");
+            console.log("1: Attack");
+            console.log("2: Use healing potion");
+            console.log("3: Run away");
+            
+            let combatChoice = readline.question("\nEnter choice (number): ");
+            let combatChoiceNum = parseInt(combatChoice);
+            
+            if (combatChoiceNum === 1) {
+                // Attack action
+                let damageDealt = weaponDamage - monsterDefense;
+                if (damageDealt < 0) damageDealt = 0; // Prevent negative damage
+                monsterHealth -= damageDealt;
+                console.log("\nYou attack the goblin and deal " + damageDealt + " damage!");
+                console.log("Goblin's remaining health: " + monsterHealth);
+
     
-    // Get player choice
-    let choice = readline.question("\nEnter choice (number): ");
-    let choiceNum = parseInt(choice);
+    }        
+        }
 
 
-
-
-
-
-}
-
-    // Game logic and player choices would go here
-    // For example, you could add more locations, combat encounters, and inventory management
-
-    
-    
-
-
-
-
-
+    }
