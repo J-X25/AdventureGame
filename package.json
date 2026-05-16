@@ -1,0 +1,21 @@
+{
+  "name": "vs-code-projects",
+  "version": "1.0.0",
+  "description": "My text adventure game from JavaScript Starter Kit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J-X25/AdventureGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/J-X25/AdventureGame/issues"
+  },
+  "homepage": "https://github.com/J-X25/AdventureGame#readme"
+}
