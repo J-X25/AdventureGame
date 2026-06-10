@@ -236,6 +236,29 @@ let registrationList = ["Nelly", "Grip", "Caveman the Juggernaut", 42];
 console.log(checkListIntegrity(scoreList, "number"));
 console.log(checkListIntegrity(registrationList, "string"));
 
+// June 10th Practice: Complex Data Structures:
+function calculateInventoryValue(productsArray) {
+   let totalValue = 0;
+    for (let product of productsArray) {
+        let itemTotal = product.price * product.quantity;
+        totalValue += itemTotal;
+        if (product.quantity === 0) {
+        console.log("Warning: " + product.name + " is out of stock!");
+    }
+}
+    return totalValue;
+
+}
+
+let storeInventory = [
+    { name: "Sneakers", price: 100, quantity: 4},
+    { name: "Hoodie", price: 50, quantity: 0},
+    { name: "Socks", price: 10, quantity: 5},
+];
+
+let grandTotal = calculateInventoryValue(storeInventory);
+console.log("Total Shop Value: $ ", grandTotal);
+
 
     
 

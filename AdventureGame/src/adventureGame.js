@@ -42,21 +42,22 @@ const shield = {
   effect: 5, // Protection amount
   description: "Reduces damage taken in combat",
 };
+
 const steelSword = {
   name: "Steel Sword",
   type: "weapon",
   value: 20, // Cost in gold
   effect: 20, // Damage amount
   description: "An advanced blade for combat",
-  };
+};
+
 const ironShield = {
   name: "Iron Shield",
   type: "armor",
   value: 16, // Cost in gold
   effect: 10, // Protection amount
   description: "Reduces more damage taken in combat",
-}
-
+};
 
 // Create empty inventory array (from previous lab)
 let inventory = []; // Will now store item objects instead of strings
@@ -64,50 +65,66 @@ let inventory = []; // Will now store item objects instead of strings
 function showLocation() {
   console.log("\n=== " + currentLocation.toUpperCase() + " ===");
 
-  let options = [];
-  if (currentLocation === "village") {
-    console.log("You're in a bustling village. The blacksmith and market are nearby.");
-    options = [
-      "Go to blacksmith",
-      "Go to market",
-      "Enter forest",
-      "Climb mountain",
-      "Check status",
-      "Use item",
-      "Help",
-      "Quit game",
-    ];
-  } else if (currentLocation === "blacksmith") {
-    console.log("The heat from the forge fills the air. Weapons and armor line the walls.");
-    options = [
-      "Buy weapons",
-      "Buy armor",
-      "Upgrade equipment",
-      "Return to village",
-    ];
-  } else if (currentLocation === "market") {
-    console.log("Merchants sell their wares from colorful stalls. A potion seller catches your eye.");
-    options = [
-      "Buy potion",
-      "Return to village",
-    ];
-  } else if (currentLocation === "forest") {
-    console.log("The forest is dark and eerie. You can hear the sounds of creatures lurking in the shadows.");
-    options = [
-      "Return to village",
-      "Check status",
-      "Use item",
-      "Help",
-      "Quit game",
-    ];
+  const groups = getOptionsForLocation(currentLocation);
+  const { movementOptions, shopOptions, combatOptions, miscOptions, options } = groups;
+
+  // Print categorized numbered menu
+  console.log('\nWhat would you like to do?');
+  let counter = 1;
+  if (movementOptions.length) {
+    console.log('\n-- Movement --');
+    movementOptions.forEach((opt) => {
+      console.log(`${counter++}: ${opt}`);
+    });
+  }
+  if (shopOptions.length) {
+    console.log('\n-- Shop --');
+    shopOptions.forEach((opt) => {
+      console.log(`${counter++}: ${opt}`);
+    });
+  }
+  if (combatOptions.length) {
+    console.log('\n-- Combat --');
+    combatOptions.forEach((opt) => {
+      console.log(`${counter++}: ${opt}`);
+    });
+  }
+  if (miscOptions.length) {
+    console.log('\n-- Other --');
+    miscOptions.forEach((opt) => {
+      console.log(`${counter++}: ${opt}`);
+    });
   }
 
-  console.log("\nWhat would you like to do?");
-  options.forEach((option, index) => {
-    console.log(`${index + 1}: ${option}`);
-  });
-
   return options;
+}
+
+function getOptionsForLocation(loc) {
+  let movementOptions = [];
+  let shopOptions = [];
+  let combatOptions = [];
+  let miscOptions = [];
+
+  if (loc === "village") {
+    console.log("You're in a bustling village. The blacksmith and market are nearby.");
+    movementOptions = ["Go to blacksmith", "Go to market", "Enter forest", "Climb mountain"];
+    miscOptions = ["Check status", "Use item", "Help", "Quit game"];
+  } else if (loc === "blacksmith") {
+    console.log("The heat from the forge fills the air. Weapons and armor line the walls.");
+    shopOptions = ["Buy weapons", "Buy armor", "Upgrade equipment"];
+    miscOptions = ["Return to village"];
+  } else if (loc === "market") {
+    console.log("Merchants sell their wares from colorful stalls. A potion seller catches your eye.");
+    shopOptions = ["Buy potion"];
+    miscOptions = ["Return to village"];
+  } else if (loc === "forest") {
+    console.log("The forest is dark and eerie. You can hear the sounds of creatures lurking in the shadows.");
+    combatOptions = ["Enter forest"]; // keep label for compatibility
+    miscOptions = ["Return to village", "Check status", "Use item", "Help", "Quit game"];
+  }
+
+  const options = [...movementOptions, ...shopOptions, ...combatOptions, ...miscOptions];
+  return { movementOptions, shopOptions, combatOptions, miscOptions, options };
 }
 function showStatus() {
   console.log("\n=== " + playerName + "'s Status ===");
@@ -245,27 +262,26 @@ function updateHealth(amount) {
  * Handles using items like potions
  * @returns {boolean} true if item was used successfully, false if not
  */
-function getItemsByType(weapon) {
-    let matchedItems = [];
-    for (let item of inventory) {
-        if (item.type === "weapon") {
-            matchedItems.push(item.name);
-        }
- 
+function getItemsByType(type) {
+  let matchedItems = [];
+  for (let item of inventory) {
+    if (item.type === type) {
+      matchedItems.push(item);
     }
+  }
   return matchedItems;
 }
 
-function getBestItem (weapon) {
-    let bestItem = null;
-    for (let item of inventory) {
-        if (item.type === "weapon") {
-            if (!bestItem || item.effect > bestItem.effect) {
-                bestItem = item;
-            }
-        }
-}
-    return bestItem;
+function getBestItem(type) {
+  let bestItem = null;
+  for (let item of inventory) {
+    if (item.type === type) {
+      if (!bestItem || item.effect > bestItem.effect) {
+        bestItem = item;
+      }
+    }
+  }
+  return bestItem;
 }
 
 function useItem() {
@@ -341,19 +357,40 @@ function hasGoodEquipment() {
  * Handles purchasing items at the blacksmith
  */
 function buyFromBlacksmith() {
-  if (playerGold >= sword.value) {
-    console.log("\nBlacksmith: 'A fine blade for a brave adventurer!'");
-    playerGold -= sword.value;
+  const shopItems = [
+    { ...sword },
+    { ...steelSword },
+    { ...shield },
+    { ...ironShield },
+  ];
 
-    // Add sword object to inventory instead of just the name
-    inventory.push({ ...sword }); // Create a copy of the sword object
-
+  console.log("\nBlacksmith: 'Welcome! Here's what I have:'");
+  shopItems.forEach((it, idx) => {
     console.log(
-      "You bought a " + sword.name + " for " + sword.value + " gold!"
+      `${idx + 1}. ${it.name} - ${it.value} gold - ${it.description}`
     );
-    console.log("Gold remaining: " + playerGold);
+  });
+  console.log(`${shopItems.length + 1}. Cancel`);
+
+  let choice = readline.question("\nBuy which item? (number): ");
+  let num = parseInt(choice);
+  if (isNaN(num) || num < 1 || num > shopItems.length + 1) {
+    console.log("\nInvalid choice. Returning to the village.");
+    return;
+  }
+  if (num === shopItems.length + 1) {
+    console.log("\nMaybe next time.");
+    return;
+  }
+
+  const item = shopItems[num - 1];
+  if (playerGold >= item.value) {
+    playerGold -= item.value;
+    inventory.push({ ...item });
+    console.log(`\nYou bought a ${item.name} for ${item.value} gold.`);
+    console.log(`Gold remaining: ${playerGold}`);
   } else {
-    console.log("\nBlacksmith: 'Come back when you have more gold!'");
+    console.log("\nBlacksmith: 'You don't have enough gold for that.'");
   }
 }
 
@@ -361,23 +398,33 @@ function buyFromBlacksmith() {
  * Handles purchasing items at the market
  */
 function buyFromMarket() {
-  if (playerGold >= healthPotion.value) {
-    console.log("\nMerchant: 'This potion will heal your wounds!'");
-    playerGold -= healthPotion.value;
+  const marketItems = [{ ...healthPotion }];
 
-    // Add potion object to inventory instead of just the name
-    inventory.push({ ...healthPotion }); // Create a copy of the potion object
+  console.log("\nMarket: 'Fresh wares! Take a look:'");
+  marketItems.forEach((it, idx) => {
+    console.log(`${idx + 1}. ${it.name} - ${it.value} gold - ${it.description}`);
+  });
+  console.log(`${marketItems.length + 1}. Cancel`);
 
-    console.log(
-      "You bought a " +
-        healthPotion.name +
-        " for " +
-        healthPotion.value +
-        " gold!"
-    );
-    console.log("Gold remaining: " + playerGold);
+  let choice = readline.question("\nBuy which item? (number): ");
+  let num = parseInt(choice);
+  if (isNaN(num) || num < 1 || num > marketItems.length + 1) {
+    console.log("\nInvalid choice. Returning to the village.");
+    return;
+  }
+  if (num === marketItems.length + 1) {
+    console.log("\nYou step away from the stall.");
+    return;
+  }
+
+  const item = marketItems[num - 1];
+  if (playerGold >= item.value) {
+    playerGold -= item.value;
+    inventory.push({ ...item });
+    console.log(`\nYou bought a ${item.name} for ${item.value} gold.`);
+    console.log(`Gold remaining: ${playerGold}`);
   } else {
-    console.log("\nMerchant: 'No gold, no potion!'");
+    console.log("\nMerchant: 'You don't have enough gold.'");
   }
 }
 
@@ -435,49 +482,61 @@ function showHelp() {
  * @returns {boolean} True if movement was successful
  */
 function move(choiceNum) {
-  let validMove = false;
+  // New move function: interprets choice number based on the current
+  // set of options returned by showLocation(). Returns true on success.
+  const groups = getOptionsForLocation(currentLocation);
+  const optionsList = groups.options;
+  const selected = optionsList[choiceNum - 1];
 
-  if (currentLocation === "village") {
-    if (choiceNum === 1) {
-      currentLocation = "blacksmith";
-      console.log("\nYou enter the blacksmith's shop.");
-      validMove = true;
-    } else if (choiceNum === 2) {
-      currentLocation = "market";
-      console.log("\nYou enter the market.");
-      validMove = true;
-    } else if (choiceNum === 3) {
-      currentLocation = "forest";
-      console.log("\nYou venture into the forest...");
-      validMove = true;
+  if (!selected) return false;
 
-      // Trigger combat when entering forest
-      console.log("\nA monster appears!");
-      if (!handleCombat()) {
-        currentLocation = "village";
-      }
+  // Movement handling
+  if (selected === "Go to blacksmith") {
+    currentLocation = "blacksmith";
+    console.log("\nYou enter the blacksmith's shop.");
+    return true;
+  }
+  if (selected === "Go to market") {
+    currentLocation = "market";
+    console.log("\nYou enter the market.");
+    return true;
+  }
+  if (selected === "Enter forest") {
+    // Check for basic weapon before allowing forest exploration
+    if (!hasItemType("weapon")) {
+      console.log("\nThe forest is dangerous. You should have a weapon before entering.");
+      return false;
     }
-  } else if (currentLocation === "blacksmith") {
-    if (choiceNum === 2) {
+    currentLocation = "forest";
+    console.log("\nYou venture into the forest...");
+    console.log("\nA monster appears!");
+    if (!handleCombat()) {
       currentLocation = "village";
-      console.log("\nYou return to the village center.");
-      validMove = true;
     }
-  } else if (currentLocation === "market") {
-    if (choiceNum === 2) {
+    return true;
+  }
+  if (selected === "Climb mountain") {
+    // Require good equipment to face the dragon
+    if (!hasGoodEquipment()) {
+      console.log("\nThe mountain path is too perilous without better gear (Steel Sword + armor).");
+      return false;
+    }
+    console.log("\nYou begin the treacherous climb toward the mountain's peak...");
+    console.log("\nAt the summit, a fearsome dragon awaits!");
+    if (!handleCombat(true)) {
+      console.log("\nYou were forced to retreat from the mountain.");
       currentLocation = "village";
-      console.log("\nYou return to the village center.");
-      validMove = true;
     }
-  } else if (currentLocation === "forest") {
-    if (choiceNum === 1) {
-      currentLocation = "village";
-      console.log("\nYou hurry back to the safety of the village.");
-      validMove = true;
-    }
+    return true;
   }
 
-  return validMove;
+  if (selected === "Return to village") {
+    currentLocation = "village";
+    console.log("\nYou return to the village.");
+    return true;
+  }
+
+  return false;
 }
 
 // ===========================
@@ -504,32 +563,20 @@ function isValidChoice(input, max) {
  */
 function handleChoice(choice, options) {
   const selectedOption = options[choice - 1];
+  // Delegate movement-related options to the move() helper
+  const movementLabels = [
+    "Go to blacksmith",
+    "Go to market",
+    "Enter forest",
+    "Climb mountain",
+    "Return to village",
+  ];
+  if (movementLabels.includes(selectedOption)) {
+    move(choice, options);
+    return;
+  }
 
   switch (selectedOption) {
-    case "Go to blacksmith":
-      currentLocation = "blacksmith";
-      console.log("\nYou head to the blacksmith.");
-      break;
-    case "Go to market":
-      currentLocation = "market";
-      console.log("\nYou walk into the market.");
-      break;
-    case "Enter forest":
-      currentLocation = "forest";
-      console.log("\nYou venture into the forest...");
-      console.log("\nA monster appears!");
-      if (!handleCombat()) {
-        currentLocation = "village";
-      }
-      break;
-    case "Climb mountain":
-      console.log("\nYou begin the treacherous climb toward the mountain's peak...");
-      console.log("\nAt the summit, a fearsome dragon awaits!");
-      if (!handleCombat(true)) {
-        console.log("\nYou were forced to retreat from the mountain.");
-        currentLocation = "village";
-      }
-      break;
     case "Check status":
       showStatus();
       break;
@@ -569,6 +616,7 @@ function handleChoice(choice, options) {
       }
       break;
     case "Return to village":
+      // Return handled by move(), but keep fallback here for safety
       currentLocation = "village";
       console.log("\nYou return to the village.");
       break;
@@ -606,24 +654,18 @@ if (require.main === module) {
       try {
         let choice = readline.question("\nEnter choice (number): ");
 
-        if (choice.trim() === "") {
-          throw "Please enter a number!";
+        if (!isValidChoice(choice, options.length)) {
+          throw new Error(
+            `Invalid input. Enter a number between 1 and ${options.length}.`
+          );
         }
 
-        let choiceNum = parseInt(choice);
-        if (isNaN(choiceNum)) {
-          throw "That's not a number! Please enter a number.";
-        }
-
-        if (choiceNum < 1 || choiceNum > options.length) {
-          throw `Please enter a number between 1 and ${options.length}.`;
-        }
-
+        let choiceNum = parseInt(choice, 10);
         validChoice = true;
         handleChoice(choiceNum, options);
       } catch (error) {
-        console.log("\nError: " + error);
-        console.log("Please try again!");
+        console.log("\nError: " + error.message);
+        console.log("Please try again.");
       }
     }
 
