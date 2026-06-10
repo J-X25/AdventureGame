@@ -246,13 +246,14 @@ function updateHealth(amount) {
  * @returns {boolean} true if item was used successfully, false if not
  */
 function getItemsByType(weapon) {
-  return ["Sword", "Iron Sword"];
-  for (let item of inventory) {
-    if (item.type === "weapon") {
-      return item.name;
+    let matchedItems = [];
+    for (let item of inventory) {
+        if (item.type === "weapon") {
+            matchedItems.push(item.name);
+        }
+ 
     }
-  }
-  return null;
+  return matchedItems;
 }
 
 function getBestItem (weapon) {
@@ -310,9 +311,16 @@ function checkInventory() {
     console.log("Your inventory is empty!");
     return;
   }
+ 
 
-  // Checks if player has good enough equipment to fight the dragon
-  function hasGoodEqupment() {
+  // Display all inventory items with numbers and descriptions
+  inventory.forEach((item, index) => {
+    console.log(index + 1 + ". " + item.name + " - " + item.description);
+  });
+}
+
+// Checks if player has good enough equipment to fight the dragon
+  function hasGoodEquipment() {
     return inventory.some((item) => item.type === "weapon" && item.effect >= 20);
   }
     let bestWeapon = getBestItem("weapon");
@@ -321,12 +329,6 @@ function checkInventory() {
     } else {
         console.log("Your weapons may not be strong enough to defeat the dragon. Consider buying better equipment.");
     }   
-
-  // Display all inventory items with numbers and descriptions
-  inventory.forEach((item, index) => {
-    console.log(index + 1 + ". " + item.name + " - " + item.description);
-  });
-}
 
 // ===========================
 // Shopping Functions
