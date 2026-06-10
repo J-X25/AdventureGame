@@ -319,16 +319,18 @@ function checkInventory() {
   });
 }
 
-// Checks if player has good enough equipment to fight the dragon
-  function hasGoodEquipment() {
-    return inventory.some((item) => item.type === "weapon" && item.effect >= 20);
-  }
-    let bestWeapon = getBestItem("weapon");
-    if (bestWeapon && bestWeapon.effect >= 20) {
-        console.log("You have a powerful weapon: " + bestWeapon.name + " with " + bestWeapon.effect + " damage!");
-    } else {
-        console.log("Your weapons may not be strong enough to defeat the dragon. Consider buying better equipment.");
-    }   
+/**
+ * Checks if the player has good enough equipment to face the dragon.
+ * Requires the advanced weapon (Steel Sword) and any armor.
+ * @returns {boolean}
+ */
+function hasGoodEquipment() {
+  const hasSteelSword = inventory.some(
+    (item) => item.type === "weapon" && item.name === "Steel Sword"
+  );
+  const hasArmor = inventory.some((item) => item.type === "armor");
+  return hasSteelSword && hasArmor;
+}
 
 // ===========================
 // Shopping Functions
