@@ -259,6 +259,27 @@ let storeInventory = [
 let grandTotal = calculateInventoryValue(storeInventory);
 console.log("Total Shop Value: $ ", grandTotal);
 
+// June 11th Practice: Complex Data Structures
+
+function getHighPerformanceCars(carArray, minHorsePower) {
+    let filteredFleet = [];
+    for (let car of carArray) {
+        if (car.horsepower >= minHorsePower) {
+            filteredFleet.push(car);
+        }
+    }
+
+    return filteredFleet;
+     
+}
+let myGarage = [
+    {model: "Civic Type R", horsepower: 315, trackReady: true },
+    {model: "Corvette Z06", horsepower: 670, trackReady: true },
+    {model: "Miata", horsepower: 181, trackReady: false },
+    {model: "GT-R Nismo", horsepower: 600, trackReady: true },
+];
+let trackDaySelection = getHighPerformanceCars(myGarage, 400);
+console.log("Track Ready Selection:", trackDaySelection);
 
     
 
