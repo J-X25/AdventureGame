@@ -281,6 +281,35 @@ let myGarage = [
 let trackDaySelection = getHighPerformanceCars(myGarage, 400);
 console.log("Track Ready Selection:", trackDaySelection);
 
+// June 12th Practice: Array Mapping with Conditions
+function generateFleetReport(carFleet) {
+
+    let fleetReport = [];
+    for(let car of carFleet) {
+        let tier;
+
+        if (car.horsepower >= 500 (tier)) {
+            let tier = "Hypercar";
+
+        } else {
+            let tier = "Sport";
+        }
+        let updateCar = {
+            model: car.model,
+            class: tier 
+        };
+        fleetReport.push(updatedCar);
+    }
+    return fleetReport;
+}
+ 
+let localTrackFleet = [
+    {model: "Porshe 911 GT3", horsepower: 502},
+    {model: "Supra MK5", horsepower: 382},
+    {model: "Ferrari SF90", horsepower: 986}
+];
+let finalReport = generateFleetReport(localTrackFleet);
+console.log(finalReport);
     
 
 
