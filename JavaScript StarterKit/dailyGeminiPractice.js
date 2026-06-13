@@ -288,13 +288,13 @@ function generateFleetReport(carFleet) {
     for(let car of carFleet) {
         let tier;
 
-        if (car.horsepower >= 500 (tier)) {
-            let tier = "Hypercar";
+        if (car.horsepower >= 500) {
+         tier = "Hypercar";
 
         } else {
-            let tier = "Sport";
+         tier = "Sport";
         }
-        let updateCar = {
+        let updatedCar = {
             model: car.model,
             class: tier 
         };
@@ -310,6 +310,38 @@ let localTrackFleet = [
 ];
 let finalReport = generateFleetReport(localTrackFleet);
 console.log(finalReport);
+
+// June 13th Practice: Freelance Invoice Calculator
+function calculateProjectQuote(baseRate, pageCount, ratePerPage, hasCustomJS) {
+    let totalEstimate = baseRate;
+
+    totalEstimate += (pageCount * ratePerPage);
+    if (hasCustomJS === true) {
+        totalEstimate += 250;
+    }
+    return totalEstimate;
+}
+// Client 1: Local diner needs a basic 4-page HTML/CSS site. No fancy JS.
+let dinerQuote = calculateProjectQuote(300, 4, 100, false);
+console.log("Diner Estimate: $", dinerQuote);
+
+// Client 2: An indie artist wants a sleek 3 page site WITH a custom JS audio player.
+let artistQuote = calculateProjectQuote(300, 3, 100, true);
+console.log("Artist Estimate: $", artistQuote);
+
+// June 13th Practice: The Dynamic Portfolio Layout(Array Layout Mapping)
+function generateGalleryLayout(imageFilesArray) {
+    let htmlTagsCollection = [];
+    for (let filename of imageFilesArray) {
+        let imgTag = `<img src="images/${filename}" class="poertfolio-thumb" />`;
+        htmlTagsCollection.push(imgTag);
+    }
+    return htmlTagsCollection;
+}
+
+let artistsUploads = ["neon-city.jpg", "retro-car.png", "sculpture.webp"];
+let structureGrid = generateGalleryLayout(artistsUploads);
+console.log(structureGrid);
     
 
 
