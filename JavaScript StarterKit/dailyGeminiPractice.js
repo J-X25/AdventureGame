@@ -342,6 +342,33 @@ function generateGalleryLayout(imageFilesArray) {
 let artistsUploads = ["neon-city.jpg", "retro-car.png", "sculpture.webp"];
 let structureGrid = generateGalleryLayout(artistsUploads);
 console.log(structureGrid);
-    
+
+// June 14th Practice: Working with basic arrays and elements
+function formatEventList(eventsArray) {
+    let cleanedEvents = [];
+    for (let eventText of eventsArray) {
+        let cleanedText = eventText.trim();
+        
+        if (eventText.length === 0) {
+        cleanedEvents.push("TBD - EVENT DATE COMING SOON");
+        } else {
+            cleanedEvents.push(cleanedText.toUpperCase());
+        }
+
+    }
+    return cleanedEvents;
+}
+
+let rawArtistSchedule = [
+    "june 20 - downtown studio tour",
+    "july 4 - independence day showcase",
+    "august 12 - live pottery workshop",
+    "",
+];
+
+let polishedSchedule = formatEventList(rawArtistSchedule);
+console.log(polishedSchedule);
+
+
 
 
