@@ -369,6 +369,29 @@ let rawArtistSchedule = [
 let polishedSchedule = formatEventList(rawArtistSchedule);
 console.log(polishedSchedule);
 
+// June 15th Practice: The Form Input Validator(Combining Strings and Booleans)
+function validateRequiredInput(userInputText) {
+    let cleanedInput = userInputText.trim();
+    if (cleanedInput.length <= 5) {
+        return false;
+    } else {
+        return true;
+    }
+}
+// Scenario A: User accurately types their name
+let testName ="NellyBuckitz";
+console.log("Is Name Valid?", validateRequiredInput(testName));
+
+//Scenario B: User completely skips the field
+let blankInput ="";
+console.log("Is Blank Valid?", validateRequiredInput(blankInput));
+
+// Scenario C: User tries to cheat the system by hitting the spacebar twice
+let sneakySpaces ="  ";
+console.log("Are Spaces Valid?", validateRequiredInput(sneakySpaces));
+
+
+
 
 
 
