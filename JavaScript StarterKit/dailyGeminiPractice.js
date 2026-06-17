@@ -390,6 +390,44 @@ console.log("Is Blank Valid?", validateRequiredInput(blankInput));
 let sneakySpaces ="  ";
 console.log("Are Spaces Valid?", validateRequiredInput(sneakySpaces));
 
+// June 15th Practice: The Form Submit Gatekeeper(Combining Logic Rules)
+function isValidUsername(usernameText) {
+    let cleanUsername = usernameText.trim();
+    if (cleanUsername.length > 4 && cleanUsername.length < 15) {
+
+        return ("Success: Username is available!");
+    } 
+    else if (cleanUsername.length > 15) {
+
+        return ("Error: Username must be less than 15 characters.");
+    }
+    else if (cleanUsername.length < 4) {
+
+        return ("Error: Username must be more than 4 characters.");
+    }
+
+
+        
+    
+
+}
+
+// Scenario A: Perfect username length
+console.log("Is 'NellyB' valid?", isValidUsername("NellyB"));
+
+// Scenario B: Too short
+console.log("Is 'Jay' valid?", isValidUsername("Jay"));
+
+// Scenario C: Too long
+console.log("Is 'SuperMegaProducerJinel' valid?", isValidUsername("SuperMegaProducerJinel"));
+
+// Scenario D: The sneaky cheat(Spaces hiding a short name)
+console.log("Is '  V4  ' valid?", isValidUsername("  V4  "));
+
+
+
+
+
 
 
 
