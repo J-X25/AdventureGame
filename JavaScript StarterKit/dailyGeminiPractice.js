@@ -424,6 +424,55 @@ console.log("Is 'SuperMegaProducerJinel' valid?", isValidUsername("SuperMegaProd
 // Scenario D: The sneaky cheat(Spaces hiding a short name)
 console.log("Is '  V4  ' valid?", isValidUsername("  V4  "));
 
+//June 17th Practice: The Playlist Duration Tracker(Array Loops and Accumulation)
+function calculatePlaylistDuration(trackDurations) {
+    let totalSeconds = 0; 
+    for (let track of trackDurations) {
+        totalSeconds += track;
+
+    }
+    return Math.round(totalSeconds / 60);
+}
+
+// Scenario A: A 3 track promotional single release
+let promoSingle = [180, 215, 165];
+console.log("Total Promo Seconds:", calculatePlaylistDuration(promoSingle));
+
+// Scenario B: An empty playlist submission
+let emptyPlaylist = [];
+console.log("Total Empty Seconds:", calculatePlaylistDuration(emptyPlaylist));
+
+// June 18th Practice: The Interview Score Evaluator(Array Filtering and Thresholds)
+function getPassingScores(scoreList, passingGrade) {
+    let acceptedCandidates =[];
+    for (let score of scoreList) {
+        if (score >= passingGrade) {
+            acceptedCandidates.push(score)
+        }
+   
+    }
+    return acceptedCandidates;
+}
+
+let panelEvaluation = [85, 62, 95, 74, 90];
+let baseLineScore = 80;
+console.log("Passing Candidates:", getPassingScores(panelEvaluation, baseLineScore));
+
+// June 19th Practice: The Social Media Tag Generator(Array Transformation)
+function generateHashtags(keywordList) {
+    let formattedTags = [];
+    for(let word of keywordList) {
+        let newTag = "#" + word;
+        formattedTags.push(newTag);
+
+    }
+    return formattedTags;
+}
+
+let marketingWords = ["music", "producer", "coding", "tracks"];
+console.log("Finished Tags", generateHashtags(marketingWords));
+
+
 
 
 
