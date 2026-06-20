@@ -472,6 +472,47 @@ function generateHashtags(keywordList) {
 let marketingWords = ["music", "producer", "coding", "tracks"];
 console.log("Finished Tags", generateHashtags(marketingWords));
 
+// June 19th Practice: Athe Asset Audit Flag(Array Threshold Extraction)
+function getHighValueAlerts(scannedPrices, highRiskThreshold) {
+    let flaggedAudits = [];
+    for (let price of scannedPrices) {
+        if (price >= highRiskThreshold) {
+            flaggedAudits.push(price);
+        }
+    }
+    return flaggedAudits;
+}
+
+let currentAudit = [15, 450, 89, 1200, 45, 600];
+let premiumLimit = 400;
+
+console.log("High Value Flags", getHighValueAlerts(currentAudit, premiumLimit));
+
+// June 20th Practice: The Video Game Inventory Stack(Array Element Verification)
+function checkPlayerInventory(inventoryBag, requiredItem) {
+  let itemFound = false;
+    for (let item of inventoryBag) {
+        if (item === requiredItem) {
+             itemFound = true;
+        }
+    } 
+    if (itemFound === true) { 
+    return "Access Granted: Item present.";
+    
+    } else {
+    return "Access Denied: Missing required item.";
+    }
+
+}
+
+let currentBag = ["Potion", "Sword", "Dragon Shield", "Bread"];
+
+// Scenario A: Player has the correct gear
+console.log(checkPlayerInventory(currentBag, "Dragon Shield"));
+
+// Scenario B: Player tries to pass with a key they don't have
+console.log(checkPlayerInventory(currentBag, "Golden Key"));
+
 
 
 
