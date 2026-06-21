@@ -513,6 +513,30 @@ console.log(checkPlayerInventory(currentBag, "Dragon Shield"));
 // Scenario B: Player tries to pass with a key they don't have
 console.log(checkPlayerInventory(currentBag, "Golden Key"));
 
+// June 21st Practice: The Business Tier Router(Array Indexing and Range Mapping)
+function determinePricingTier(tierThresholds, currentUsers) {
+    for (let i = 0; i < tierThresholds.length; i++) {
+        if (currentUsers <= (tierThresholds[i])) {
+            return i;
+          }
+        
+    } 
+
+    return "Enterprise Tier";
+ }
+
+ let subscriptionLimits = [100, 500, 1000];
+
+ // Scenario A: A small startup with 45 users
+ console.log("Tier Index:", determinePricingTier(subscriptionLimits, 45));
+
+ // Scenario B: Mid-sized agency with 650 users
+ console.log("Tier Index", determinePricingTier(subscriptionLimits, 650));
+
+ // Scenario C: Massive corporationwith 2500 users
+ console.log("Tier Index:", determinePricingTier(subscriptionLimits, 2500));
+
+
 
 
 
