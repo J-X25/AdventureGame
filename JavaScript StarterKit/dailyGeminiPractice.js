@@ -536,6 +536,60 @@ function determinePricingTier(tierThresholds, currentUsers) {
  // Scenario C: Massive corporationwith 2500 users
  console.log("Tier Index:", determinePricingTier(subscriptionLimits, 2500));
 
+ // June 21st Practice: The Event Listener Connector(Bridging Logic to the Browser)
+ function handleUserInput(inputString) {
+    let cleanNumber = Number(inputString);
+    let businessLimits = [100, 500, 1000];
+
+    let assignedTier = determinePricingTier(businessLimits, cleanNumber);
+
+    return "System Routing: Moving user to Tier " + assignedTier;
+ }
+let simulatedWebFormInput = "650";
+console.log(handleUserInput(simulatedWebFormInput));
+
+// June 22nd Practice: The Theme Toggler(Working with State and Default Fallbacks)
+function activateSiteTheme(supportedThemes, requestedTheme) {
+    let isThemeValid = false;
+    for (let theme of supportedThemes) {
+        if (theme === requestedTheme) {
+             isThemeValid = true;
+        } 
+    }
+            if (isThemeValid === true) {
+                return "Setting applied: " + requestedTheme;
+        } else {
+                return "Setting missing. Default applied: light";
+    
+
+        }
+    
+}
+
+let activePalette = ["light", "dark", "sepia", "ocean"];
+
+// Scenario A: User clicks "dark" mode button
+console.log(activateSiteTheme(activePalette, "dark"));
+
+// Scenario B: User's profile has an unmapped or outdated style name
+console.log(activateSiteTheme(activePalette, "neon-retro"));
+
+// June 23rd Practice: The Multi-Stage Security Alert(Complex Conditional Filtering(See how the engine sweeps an incident sheet looking for items that are at least $500, but under the $5000 system limit))
+function getHighRiskAlerts(incidentValues, minRiskCost) {
+    let activeInvestigationList = [];
+    for (let cost of incidentValues) {
+        if (cost >= minRiskCost && cost < 5000) {
+            activeInvestigationList.push(cost);
+        }
+    }
+    return activeInvestigationList;
+}
+
+let logIncidentCosts = [150, 600, 1200, 45, 7500, 3200];
+let highRiskFloor = 500;
+
+console.log("Cases to Audit:", getHighRiskAlerts(logIncidentCosts, highRiskFloor));
+
 
 
 
