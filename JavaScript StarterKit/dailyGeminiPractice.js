@@ -590,6 +590,144 @@ let highRiskFloor = 500;
 
 console.log("Cases to Audit:", getHighRiskAlerts(logIncidentCosts, highRiskFloor));
 
+// June 23rd Practice: The Audio Device Analyzer(Array Mapping and Boundary Clamping)
+function normalizeAudioLevels(signalList, maxSafetyCeiling) {
+    let safeSignals = [];
+    for (let level of signalList) {
+        if (level > maxSafetyCeiling) {
+            safeSignals.push(maxSafetyCeiling);
+    } else {
+        safeSignals.push(level);
+        }
+    
+    }
+    return safeSignals;
+}
+
+let rawMicFeed = [30, 75, 120, 95, 105, 40];
+let safetyCap = 100;
+
+console.log("Mastered Audio output:", normalizeAudioLevels(rawMicFeed, safetyCap));
+
+// June 24th Practice: The Audio Output Stream(Array Merging and Interleaving)
+function mergeStereoStreams(leftChannel, rightChannel) {
+    let masterOutputStream = [];
+    for (let i =0; i < leftChannel.length; i++) {
+        masterOutputStream.push(leftChannel[i]);
+        masterOutputStream.push(rightChannel[i]);
+    }
+    return masterOutputStream;
+}
+
+let leftBuffer = [12, 45, 88];
+let rightBuffer = [18, 50, 92];
+
+console.log("Stereo Feed", mergeStereoStreams(leftBuffer, rightBuffer));
+
+// June 25th Practice: The Audio Filter Log(Array Filtering & Value Inversion)
+function cleanAndInvertAudio(rawSignalArray) {
+    let processedSignals = [];
+    for (let amplitude of rawSignalArray) {
+        if (amplitude !== 0) {
+            let invertedValue = amplitude * -1;
+            processedSignals.push(invertedValue);
+        }
+    }
+    return processedSignals;
+}
+
+let rawWaveData = [5, 0, -22, 14, 0, 0, -8];
+
+console.log("Inverted Active Signals", cleanAndInvertAudio(rawWaveData));
+
+// June 26th Practice: The Responsive Layout(Array Multi-Boundary Mapping)
+function getResponsiveLayoutMode(breakpointWidths, currentScreenWidth) {
+    for (let i = 0; i < breakpointWidths.length; i++) {
+        if (currentScreenWidth <= breakpointWidths[i]) {
+            if (i === 0) return "Mobile View";
+            if (i === 1) return "Tablet View";
+            if (i === 2) return "Laptop View";
+        }
+    }
+    
+    return "Desktop View";
+    
+}
+
+let standardBreakpoints = [480, 768, 1024];
+
+// Scenario A: A user opens the app on an iPhone (375px wide)
+console.log(getResponsiveLayoutMode(standardBreakpoints, 375));
+
+// Scenario B: A user opens the app on an iPad (768px wide)
+console.log(getResponsiveLayoutMode(standardBreakpoints, 768));
+
+// Scenario C: A user opens the app on a 4K monitor (2560px wide)
+console.log(getResponsiveLayoutMode(standardBreakpoints, 2560));
+
+// June 27th Practice: The Video Frame Rate Smoother(Array Interpolation & Averaging)
+function smoothFrameDrop(fpsTimeLine, minAcceptableFPS) {
+    let smoothedTimeLine = [];
+    for (let i = 0; i < fpsTimeLine.length; i++) {
+        if (i > 0 && i < fpsTimeLine.length - 1 && fpsTimeLine[i] < minAcceptableFPS) {
+            let smoothedValue = (fpsTimeLine[i - 1] + fpsTimeLine[i + 1]) / 2;
+            smoothedTimeLine.push(smoothedValue);
+            
+        } else {
+            smoothedTimeLine.push(fpsTimeLine[i]);
+        }
+    }
+    return smoothedTimeLine;
+}
+
+let videoRenderLog = [30, 59, 14, 60, 58];
+let performanceFloor = 30;
+
+console.log("Smoothed Output Time:", smoothFrameDrop(videoRenderLog, performanceFloor));
+
+// June 28th Practice: The Game Loop Vector(Array Scalar Multiplication)
+function scaleMovementVector(baseVector, multipler) {
+    let scaledVector = [];
+    for (let coordinate of baseVector) {
+       let boostedSpeed = coordinate * multipler;
+        scaledVector.push(boostedSpeed);
+    }
+    return scaledVector;
+}
+
+let arrowFlightPath = [15, -8];
+let speedPadModifier = 3;
+
+console.log("Boosted Vector Output", scaleMovementVector(arrowFlightPath, speedPadModifier));
+
+// June 29th Practice(Day 50!): The Weekly Web Trend Analyzer(Array Ooptimization & Percent Shifts)
+function analyzeSlowLoadSpeeds(weeklyLoadTimes, speedThreshold) {
+    let totalSlowTime = 0;
+    let slowPageCount = 0;
+        for (let loadTime of weeklyLoadTimes) {
+            if (loadTime > speedThreshold) {
+                totalSlowTime += loadTime;
+                slowPageCount++;
+
+            }
+          
+            }
+            if (slowPageCount > 0) {
+                let average = totalSlowTime / slowPageCount;
+                return "Average Slow Load Time: " + average + "ms";
+            } else {
+                return "Optimization Perfect: All pages fast!"
+            }
+                
+         }
+
+         let clientSiteLogs = [150, 480, 90, 550, 200, 320, 110];
+         let maxTargetSpeed = 300;
+
+         console.log(analyzeSlowLoadSpeeds(clientSiteLogs, maxTargetSpeed));
+
+
+
 
 
 
