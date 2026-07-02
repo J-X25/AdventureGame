@@ -726,6 +726,73 @@ function analyzeSlowLoadSpeeds(weeklyLoadTimes, speedThreshold) {
 
          console.log(analyzeSlowLoadSpeeds(clientSiteLogs, maxTargetSpeed));
 
+// June 30th Practice (Day 51): The Layout Conversion Tracker(Data Range Constraints & Percentage Mapping)
+function clampInterfacePercentage(rawCalculation) {
+    if (rawCalculation < 0) {
+        return 0;
+    }
+    else if (rawCalculation > 100) {
+        return 100;
+    }
+    else {
+        return rawCalculation;
+    }
+}
+
+// Test Case A: User clicks a broken toggle that generates an underflow value
+console.log("Sanitized Progress:", clampInterfacePercentage(-25));
+
+// Test Case B: User finishes all tasks and triggers a bonus calculation spike 
+console.log("Sanitized Progress:", clampInterfacePercentage(142));
+
+// Test Case C: A standard normal user interaction
+console.log("Sanitized Progress:", clampInterfacePercentage(68));
+
+// June 30th Practice (Day 52): The UX Layout Shift Detector(Array Flagging & Boolean Logic)
+function hasSeveralLayoutShift(shiftScores, dangerThreshold) {
+    for (let score of shiftScores) {
+        if (score > dangerThreshold) {
+            return true;
+        }
+    }
+    return false;
+}
+
+let stableSession = [0.01, 0.02, 0.05, 0.03];
+let unstableSession = [0.02, 0.04, 0.35, 0.01];
+let criticalLimit = 0.10;
+
+console.log("Stable Audit:", hasSeveralLayoutShift(stableSession, criticalLimit));
+console.log("Unstable Audit:", hasSeveralLayoutShift(unstableSession, criticalLimit));
+
+// June 30th Practice (Day 53): The Acoustic Seal Leak Finder(Finding Array Minimums)
+function findAcousticLeak(attenuationLog, safetyFloor) {
+    let lowestIsolation = attenuationLog[0];
+    for (let dbValue of attenuationLog) {
+        if (dbValue < lowestIsolation) {
+            lowestIsolation = dbValue;
+        } 
+         if (lowestIsolation < safetyFloor) {
+
+        return "Leak Detected! Weakest point: " + lowestIsolation + "dB";
+        } else {
+        return "Acoustic Seal Secure: Pass!";    
+        }
+
+    }
+
+}
+
+let prototypeA = [25, 22, 11, 30, 28];
+let prototypeB = [22, 26, 18, 24, 20];
+let qcFloor = 15;
+
+console.log("Prototype A Audit:", findAcousticLeak(prototypeA, qcFloor));
+
+console.log("Prototype B Audit:", findAcousticLeak(prototypeB, qcFloor));
+
+
+
 
 
 
