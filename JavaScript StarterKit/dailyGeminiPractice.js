@@ -765,7 +765,7 @@ let criticalLimit = 0.10;
 console.log("Stable Audit:", hasSeveralLayoutShift(stableSession, criticalLimit));
 console.log("Unstable Audit:", hasSeveralLayoutShift(unstableSession, criticalLimit));
 
-// June 30th Practice (Day 53): The Acoustic Seal Leak Finder(Finding Array Minimums)
+// July 1st Practice (Day 53): The Acoustic Seal Leak Finder(Finding Array Minimums)
 function findAcousticLeak(attenuationLog, safetyFloor) {
     let lowestIsolation = attenuationLog[0];
     for (let dbValue of attenuationLog) {
