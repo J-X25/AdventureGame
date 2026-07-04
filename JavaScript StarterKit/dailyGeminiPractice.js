@@ -791,6 +791,30 @@ console.log("Prototype A Audit:", findAcousticLeak(prototypeA, qcFloor));
 
 console.log("Prototype B Audit:", findAcousticLeak(prototypeB, qcFloor));
 
+//July 2nd Practice (Day 54): The Asset Protection Audit Scanner(Array Filtering and Value Matches)
+function scanAuditFlags(dailyFlags, targetRiskCode) {
+    let isolatedIncidents = [];
+    for (let eventCode of dailyFlags) {
+        if (eventCode === targetRiskCode) {
+            isolatedIncidents.push(eventCode);
+        }
+         if (isolatedIncidents.length > 0) {
+            return "Audit Alert: Found " + isolatedIncidents.length + " high-risk exceptions.";
+        } else {
+            return "Audit Clean: Zero risk flags detected.";
+        }
+    }
+}
+
+let registerLogA = [12, 99, 10, 14, 99, 45, 99];
+let registerLogB = [10, 12, 14, 11, 15, 20, 12];
+let riskThreshold = 99;
+
+console.log("Register A Report:", scanAuditFlags(registerLogA, riskThreshold));
+console.log("Register B Report:", scanAuditFlags(registerLogB, riskThreshold));
+
+
+
 
 
 
