@@ -813,6 +813,106 @@ let riskThreshold = 99;
 console.log("Register A Report:", scanAuditFlags(registerLogA, riskThreshold));
 console.log("Register B Report:", scanAuditFlags(registerLogB, riskThreshold));
 
+// July 3rd Practice (Day 55) : The Hip Hop Track Duration Mixer(Array Accumulation and Time Conversion)
+function calculateTrackRuntime(segmentSeconds) {
+    let totalSeconds = 0;
+    for (let seconds of segmentSeconds) {
+        totalSeconds += seconds;
+    let minutes = Math.floor(totalSeconds / 60);
+    let remainingSeconds = totalSeconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+    return "Total Runtime: " + minutes + ":" + remainingSeconds;
+    
+    }
+   
+}
+
+let trackArrangement = [45, 120, 95, 14]; // Intro, Verse 1, Verse 2, Outro
+console.log(calculateTrackRuntime(trackArrangement));
+
+let shortRadioEdit = [60, 120, 5]; // Triggers the single digit padding check
+console.log(calculateTrackRuntime(shortRadioEdit));
+
+// July 4th Practice (Day 56): The Project File Type Validator(Array Extensions & String Matching)
+function validateUploadedFiles(fileNames, allowedExtension) {
+    let rejectedCount = 0;
+        for (let fileName of fileNames) {
+            if (!fileName.endsWith(allowedExtension)) {
+                rejectedCount++;
+            }
+        }
+            if (rejectedCount > 0) {
+                return "Upload Blocked: " + rejectedCount + " invalid files detected.";
+            } else {
+                return "All files verified. Upload successful!";
+            }
+}
+
+let clientGraphicsFolder = ["logo.png", "hero.-bg.png", "icon.png"];
+let mixedAssetsFolder = ["avatar.png", "track.mp3", "promo.mov", "graphic.png"];
+let targetFormat = ".png";
+
+console.log("Graphics Batch:", validateUploadedFiles(clientGraphicsFolder,targetFormat));
+console.log("Mixed Batch:", validateUploadedFiles(mixedAssetsFolder, targetFormat));
+
+// July 5th Practice (Day 57): The Dynamic Portfolio Inventory Filter(Array reversal & Multi-Value Matching)
+function preparePortfolioGrid(assetCollection, targetTag) {
+    let matchedAssets =[];
+    for (let asset of assetCollection) {
+        if (asset.startsWith(targetTag)) {
+            matchedAssets.push(asset);
+        }
+    }
+    matchedAssets.reverse();
+        return matchedAssets;
+    }
+
+    let mediaFiles = [
+        "featured:track1.mp3",
+        "standard:footer.jpg",
+        "featured:promoVideo.mp4",
+        "standard:sidebar.png",
+        "featured:albumArt.png"
+    ];
+    let activeFilter = "featured";
+
+    console.log("Render Queue:", preparePortfolioGrid(mediaFiles, activeFilter));
+
+    // July 6th Practice (Day 58): The Store Foot-Traffic Tracker(Array Slicing & Peak Interval Analytics)
+    function analyzePeakTraffic(hourlyTraffic, startIndex, endIndex, targetPeakVolume) {
+        let trafficWindow = hourlyTraffic.slice(startIndex, endIndex);
+        let windowTotal = 0;
+        for (let count of trafficWindow) {
+            windowTotal += count;
+        }
+        if (windowTotal >= targetPeakVolume) {
+            return "High Volume Alert: " + windowTotal + " entries recorded during this shift.";
+        } else {
+            return "Normal Operations: Shift total is " + windowTotal + ".";
+        }
+    }
+
+    // Full 8 hour log sequence
+    let saturdayTraffic = [50, 75, 200, 350, 400, 110, 90, 60];
+
+    // Foucus parameters: Starts at index2 (200), ends before inxex 5 (110)
+    let startHour = 2;
+    let endHour = 5;
+    let alertThreshold = 800;
+
+    console.log(analyzePeakTraffic(saturdayTraffic, startHour, endHour, alertThreshold));
+
+
+
+            
+        
+
+
+
+
+
 
 
 
