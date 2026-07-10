@@ -904,6 +904,105 @@ function preparePortfolioGrid(assetCollection, targetTag) {
 
     console.log(analyzePeakTraffic(saturdayTraffic, startHour, endHour, alertThreshold));
 
+// July 7th Practice(Day 59): The DOM Node List Parser(Array Mapping & Layout Extraction)
+function parseLayoutPrices(domNodeStrings, maxBudget) {
+    let cleanBudgetPrices = [];
+    for (let rawPrice of domNodeStrings) {
+    let cleanString = rawPrice.replace("$", "");
+    let numericPrice = parseFloat(cleanString);
+    if (numericPrice <= maxBudget) {
+        cleanBudgetPrices.push(numericPrice);
+    }
+
+    }
+    return cleanBudgetPrices;
+}
+
+
+let layoutElementData = ["$150.00", "$24.99", "$55.00", "$89.00", "$12.50"];
+let clientLimit = 60;
+
+console.log("Filtered Numbers:", parseLayoutPrices(layoutElementData, clientLimit));
+
+// July 8th Practice(Day 60): The Dynamic UI Theme Toggler(Array Toggling & Cyclic Indexing)
+function getNextLayoutTheme(themePalette, currentTheme) {
+let currentIndex = themePalette.indexOf(currentTheme);
+    if (currentTheme === -1) {
+        return themePalette[0];
+
+    }
+let nextIndex = (currentIndex + 1) % themePalette.length;
+return themePalette[nextIndex];
+
+}
+
+let limeBrandThemes = ["light", "dark", "lime-classic", "slate-neon"];
+
+//Test A: Standard progression from index 0 to index 1
+console.log("Next Look:", getNextLayoutTheme(limeBrandThemes, "light"));
+
+//Test B: The wrap-around trigger from the final index back to 0
+console.log("Next Look:", getNextLayoutTheme(limeBrandThemes, "slate-neon"));
+
+//Test C: An invalid input fallback trigger
+console.log("Next Look:", getNextLayoutTheme(limeBrandThemes, "retro-blue"));
+
+// July 9th Practice(Day 61): The Sub-Grid Asset Spacer(Array Chunking & Layout Row Math)
+function splitGridRows(masterAssets, rowSize) {
+    let gridRows = [];
+    for (let i = 0; i < masterAssets.length; i += rowSize) {
+        let rowChunk = masterAssets.slice(i, i = rowSize);
+        gridRows.push(rowChunk);
+    }
+    return gridRows;
+}
+
+let galleryFiles = ["hero.jpg", "thumb1.png", "banner.jpg", "logo.svg"];
+let columnPerLayoutRow = 2;
+
+console.log("Structured Grid rows:", splitGridRows(galleryFiles, columnPerLayoutRow));
+
+// July 10th Practice(Day 62): The Brand Palette Contrast Checker(Array Mapping & Threshold Filtering)
+function checkContrastCompliance(contrastScores, minimumPassingScore) {
+    let failingScores = [];
+    for (let score of contrastScores) {
+        if (score < minimumPassingScore) {
+            failingScores.push(score);
+        }
+    }
+        if (failingScores.length > 0) {
+            return "Accessibility Alert: Fix " + failingScores.length + " low-contrast layout elements(s).";
+        } else {
+            return "Design Fully Compliant: All elements pass accessibility specifications";
+        }
+}
+
+let darkNeonPalette = [5.1, 4.8, 7.2, 8.5];
+let draftLayout     = [4.6, 3.1, 6.0, 2.9, 5.0];
+let wcagStandard = 4.5;
+
+console.log("Dark Neon Theme:", checkContrastCompliance, (darkNeonPalette, wcagStandard));
+console.log("Draft Layout:", checkContrastCompliance, (draftLayout, wcagStandard));
+
+// July 10th Practice (Day 63): The Event Attendance Cap(Array Slicing & Boundary Reporting)
+function manageEventCapacity(guestList, maxCapacity) {
+    let approvedGuests = guestList.slice(0, maxCapacity);
+    let waitListCount = guestList.length - maxCapacity;
+        if (guestList.length > maxCapacity) {
+            return "Event Full: Admitted " + approvedGuests.length + " guests. " + waitListCount + " turned away.";
+        } else {
+            return "Event Open: All " + guestList.length + " registered guests admitted.";
+        }
+}
+
+let rsvpListA = ["Malik", "Chloe", "Tariq", "Elena", "Devon"];
+let rsvpListB = ["Marcus", "Nia",];
+let venueLimit = 3;
+
+console.log("Roster A Audit:", manageEventCapacity(rsvpListA, venueLimit));
+console.log("Roster B Audit:", manageEventCapacity(rsvpListB, venueLimit));
+
+
 
 
             
