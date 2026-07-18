@@ -1002,6 +1002,156 @@ let venueLimit = 3;
 console.log("Roster A Audit:", manageEventCapacity(rsvpListA, venueLimit));
 console.log("Roster B Audit:", manageEventCapacity(rsvpListB, venueLimit));
 
+// July 11th Practice (Day 64): The Runway VIP Seat Allocator(Array Swapping & Index Re-ordering)
+function swapRunwaySeats(seatingRow, index1, index2) {
+    if (index1 < 0 || index1 >= seatingRow.length || index2 < 0 || index2 >= seatingRow.length) {
+        return seatingRow;
+    }
+    let holdingSeat = seatingRow[index1];
+    seatingRow[index1] = seatingRow[index2];
+    seatingRow[index2] = holdingSeat;
+
+    return seatingRow;
+}
+
+let currentFrontRow = ["Editor Alex", "Guest Blake", "Stylist Casey", "VIP Jordan"];
+let targetSeat = 1;
+let prioritySeat = 3;
+
+console.log("Updated Seating:", swapRunwaySeats(currentFrontRow, targetSeat, prioritySeat));
+
+// July 12th Practice (Day 65): The Media Asset Metadata Sanitizer(Array Cleaning & Whitespace Stripping)
+function sanitizeAssetMetadata(rawMetadata) {
+    let cleanMetadata = [];
+    for (let textItem of rawMetadata) {
+        let trimmedText = textItem.trim();
+        if (trimmedText !== "") {
+            cleanMetadata.push(trimmedText);
+    }
+}
+    return cleanMetadata;
+}
+
+let rawInputList = ["  See It ", "  ", "Caribbean Flex    ", "  ", " Intro Beat  "];
+console.log("Sanitized List:", sanitizeAssetMetadata(rawInputList));
+
+// July 13th Practice (Day 66): The Fashion Show Model Lineup Selector(Array Inversion & Index Slicing)
+function generateFinaleLineup(fullLineup, start, end) {
+    let selectedSegment = fullLineup.slice(start, end);
+    selectedSegment.reverse();
+    return selectedSegment;
+}
+let runwayShowOrder = ["Elena", "Wyntress", "Chloe", "Tariq", "Will", "Dom"];
+let segmentStart = 1;
+let segmentEnd = 4;
+
+console.log("Finale Segment:", generateFinaleLineup(runwayShowOrder, segmentStart, segmentEnd));
+
+// July 14th Practice (Day 67): The Live Show Inventory Reconciliation(Array Intersection & Discrepancy Auditing)
+function reconcileInventory(expectedManifest, physicalCount) {
+    let missingItems = [];
+    for (let barcode of expectedManifest) {
+        if (!physicalCount.includes(barcode)) {
+
+        }
+    }
+    if (missingItems.length > 0) {
+        return "Audit Alert: " + missingItems.length + " item(s) unaccounted for. Missing: " + missingItems.join(", ");
+    } else {
+        return "Reconciliation Clean: Physical count matches manifest perfectly!";
+    }
+}
+
+let expectedPremiumRack = ["JACKET-01", "HOODIE-02", "HAT-03", "DENIM-04"];
+let actualFloorScan = ["JACKET-01", "HAT-03"];
+
+let cleanBinExpected = ["SHIRT-10", "SHIRT-11"];
+let cleanBinActual = ["SHIRT-10", "SHIRT-11"];
+
+console.log(reconcileInventory(expectedPremiumRack, actualFloorScan));
+console.log(reconcileInventory(cleanBinExpected, cleanBinActual));
+
+// July 15th Practice (Day 68): The Promo Tag Deduplicator(Array Deduplication & Filtering)
+function getUniqueTags(rawTags) {
+    let uniqueTags = [];
+    for (let tag of rawTags) {
+        if (!uniqueTags.includes(tag)) {
+            uniqueTags.push(tag);
+        }
+    }
+    return uniqueTags;
+}
+
+let rawProjectTags = ["hiphop", "fashion", "hiphop", "video", "fashion", "music"];
+console.log("Clean Navigation Tags:", getUniqueTags(rawProjectTags));
+
+// July 16th Practice (Day 69) The Audio Track Decibel Normalizer (Array Modification & Limit Clamping)
+function clampTrackDecibels(decibelLevels, safetyCeiling) {
+  let normalizedTrack = [];
+  for (let dbLevel of decibelLevels) {
+    if (dbLevel > safetyCeiling) {
+        normalizedTrack.push(safetyCeiling);
+    } else {
+        normalizedTrack.push(dbLevel);
+    }
+  }
+  return normalizedTrack;
+}
+
+let vocalTrackPeaks = [-10, -5, 1, -1, 3, -4, 0];
+let absoluteCeiling = -2;
+
+console.log("Limiter Output:", clampTrackDecibels(vocalTrackPeaks, absoluteCeiling));
+
+// July 17th Practice (Day 70) The Asset Protection Surveillance Log(Array Rotation & Circular Buffers)
+function updateSurveillanceLog(activeLog, newEvent, maxLogCapacity) {
+    activeLog.push(newEvent);
+    if (activeLog.length > maxLogCapacity) {
+        activeLog.shift();
+    }
+    return activeLog;
+}
+
+let currentLog = ["back_door_trip", "vault_access"];
+let limit = 3;
+
+// Test Case A: Event added without hitting maximum limit
+console.log("Log State 1:", updateSurveillanceLog(currentLog, "register_short", limit));
+// Test Case B: Buffer is full! Adding a new event must force the oldest out
+console.log("Log State 2:", updateSurveillanceLog(currentLog, "motion_dock_4", limit));
+
+// July 17th Practice (Day 71): The Web Configurator Customizer(Array Mapping & String Interpolation)
+function formatConfiguratorSelections(selections, brandPrefix) {
+    let formattedOptions = [];
+    for (let options of selections) {
+        let labeledOption = `${brandPrefix} Custom:${options}`;
+        formattedOptions.push(labeledOption);
+
+    }
+        return formattedOptions;
+}
+let customerSelections = ["Acid Wash Green", "Embroidery Logo", "Heavyweight Hood"];
+let clientBrand = "LIME";
+
+console.log("Invoice Package:", formatConfiguratorSelections(customerSelections, clientBrand));
+
+// July 18th Practice (Day 72): The Media Asset Aspect-Ratio Validator(Array Mapping & Boundary Checks)
+function filterLandscapeAssets(mediaRatios, minLandscapeRatio) {
+    let approvedLandscapeRatios = [];
+    for (let ratio of mediaRatios) {
+        if (ratio >= minLandscapeRatio) {
+            approvedLandscapeRatios.push(ratio);
+        }
+    }
+    return approvedLandscapeRatios;
+}
+
+let clientUpoladRatios = [1.77, 0.56, 2.39, 0.75, 1.33];
+let landscapeBaseline = 1.0;
+
+console.log("Verified Assets for Grid:", filterLandscapeAssets(clientUpoladRatios, landscapeBaseline));
+
+
 
 
 
