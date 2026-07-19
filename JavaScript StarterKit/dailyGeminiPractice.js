@@ -1151,6 +1151,23 @@ let landscapeBaseline = 1.0;
 
 console.log("Verified Assets for Grid:", filterLandscapeAssets(clientUpoladRatios, landscapeBaseline));
 
+// July 19 Pactice (Day 73): The Live Audio Session Tracklist(Array Concatenation & Master Set Construction)
+function compileMasterSetlist(warmupTracks, mainStems) {
+    let masterSet = warmupTracks.concat(mainStems);
+    if (masterSet.length >= 4) {
+        return "Showtime Ready: Master set compiled with " + masterSet.length + " tracks total.";
+    } else {
+        return "Setlist Warning: Add more tracks. Current lineup only has " + masterSet.length + " tracks.";
+    }
+}
+
+let myWarmup = ["Intro Ambient", "LIME Instrumental"];
+let myMainVocal = ["See It", "Caribbean Flex"];
+let shortSet = ["Solo Verse"];
+
+console.log("Full Show Test:", compileMasterSetlist(myWarmup, myMainVocal));
+console.log("Short Show Test:", compileMasterSetlist(shortSet, myMainVocal));
+
 
 
 
