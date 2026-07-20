@@ -1168,6 +1168,22 @@ let shortSet = ["Solo Verse"];
 console.log("Full Show Test:", compileMasterSetlist(myWarmup, myMainVocal));
 console.log("Short Show Test:", compileMasterSetlist(shortSet, myMainVocal));
 
+// July 20th Practice (Day 74): The Retail Asset Recovery Log(Array Splice & Incident Removal)
+function resolveIncidentFile(activeCases, falseAlarmID) {
+    let targetIndex = activeCases.indexOf(falseAlarmID);
+    if (targetIndex !== -1) {
+        activeCases.splice(targetIndex, 1);
+    }
+    return activeCases;
+} 
+
+let morningCases = ["Case-A8", "Case-B2", "Case-C9", "Case-D4"];
+let mistakeCode = "Case-C9";
+
+console.log("Updated Cases:", resolveIncidentFile(morningCases, mistakeCode));
+
+console.log("Rogue Code Check:", resolveIncidentFile(morningCases, "Case-Z10"));
+
 
 
 
