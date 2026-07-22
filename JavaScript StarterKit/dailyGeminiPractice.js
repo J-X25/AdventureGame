@@ -1184,6 +1184,22 @@ console.log("Updated Cases:", resolveIncidentFile(morningCases, mistakeCode));
 
 console.log("Rogue Code Check:", resolveIncidentFile(morningCases, "Case-Z10"));
 
+// July 21st Practice (Day 75): The UI Component Depth Indexer(Array Search & Index Inspection)
+function getComponentDepth(layoutStack, targetComponent) {
+    let layerDepth = layoutStack.indexOf(targetComponent);
+    if (layerDepth !== -1) {
+        return "Component Found: " + targetComponent + " is active at Layer Depth " + layerDepth + ".";
+     } else {
+        return "Render Notice: " + targetComponent + " is not present in the current layout stack.";
+     }
+}
+
+let activeUIStack = ["BaseCanvas", "SleeveDesign", "ChestLogo", "ModalOverlay"];
+
+console.log(getComponentDepth(activeUIStack, "ChestLogo"));
+console.log(getComponentDepth(activeUIStack, "FooterNav"));
+
+
 
 
 
