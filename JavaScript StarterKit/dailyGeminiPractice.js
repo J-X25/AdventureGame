@@ -1199,6 +1199,44 @@ let activeUIStack = ["BaseCanvas", "SleeveDesign", "ChestLogo", "ModalOverlay"];
 console.log(getComponentDepth(activeUIStack, "ChestLogo"));
 console.log(getComponentDepth(activeUIStack, "FooterNav"));
 
+// July 22nd (Day 76): The Audio Stem Mute Toggle(Array Replacement & In-Place Mutation)
+function toggleStemMute(activeStems, targetStem) {
+    let stemIndex = activeStems.indexOf(targetStem);
+    if (stemIndex !== -1) {
+    let activeStems = [stemIndex] = 'Muted:  ${targetStem}';
+    return "Channel Updated: " + targetStem + " has been muted.";
+    } else {
+        return "Mixer Error: " + targetStem + " was not found in current session.";
+    }
+}
+
+let currentSessionStems = ["Lead Vocals", "808 Kick", "HiHats", "Guitar Lead"];
+
+console.log(toggleStemMute(currentSessionStems, "808 Kick"));
+console.log("Updated Mixer Stems:", currentSessionStems);
+console.log(toggleStemMute(currentSessionStems, "Brass Horns"));
+
+// July 23rd Practice (Day 77): The Retail Asset Priority Re-Order(Array Unshift & Queue Prepending)
+function dispatchPriorityAlert(eventQueue, incomingAlert) {
+    if (incomingAlert.includes("PRIORITY")) {
+        eventQueue.unshift(incomingAlert);
+        return "EMERGENCY DISPATCH: Priority alert prepended to position 0."
+    } else {
+        eventQueue.push();
+        return "Standard Log: Alert appended to back of queue."
+    }
+}
+
+let activeSecurityQueue =  ["cash_drawer_open", "stockroom_motion"];
+
+// Test Case A: Standard Alert
+console.log(dispatchPriorityAlert(activeSecurityQueue, "fitting_room_assistance"));
+
+// Test Case B: Priority Alert
+console.log(dispatchPriorityAlert(activeSecurityQueue, "PRIORITY: jewel_case_breach"));
+
+console.log("Final Queue State:", activeSecurityQueue);
+
 
 
 
