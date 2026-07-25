@@ -1237,6 +1237,43 @@ console.log(dispatchPriorityAlert(activeSecurityQueue, "PRIORITY: jewel_case_bre
 
 console.log("Final Queue State:", activeSecurityQueue);
 
+// July 24th Practice (Day 78): The Resposive Canvas Layout Scale(Array Math & Dimensions Normalization)
+function scaleCanvasDimensions(rawDimensions, scaleFactor) {
+    let scaledDimensions = [];
+    for (let pixelVal of rawDimensions) {
+        let newMeasurement = Math.round(pixelVal * scaleFactor);
+        scaledDimensions.push(newMeasurement);
+    }
+    return scaledDimensions;
+}
+
+let originalCanvas = [1920, 1080, 1280, 720];
+let mobileZoom = 0.33;
+
+console.log("Scaled Canvas Dimensions", scaleCanvasDimensions(originalCanvas, mobileZoom));
+
+// July 25th Practice (Day 79): The Setlist Runtime Accumulator(Array Accumulation & Boundary Summing)
+function calculateTotalRuntime(trackDurations, targetLimit) {
+    let totalSeconds = 0;
+    for (let duration of trackDurations) {
+         totalSeconds += duration;
+    }
+        if (totalSeconds <= targetLimit) {
+            return "Set Approved: Total runtime is " + totalSeconds + " seconds (withing target limit).";
+        } else {
+        let overage = totalSeconds - targetLimit;
+            return "Over Limit: Total runtime is " + totalSeconds + " seconds (exceeds target by " + (totalSeconds - targetLimit) + " seconds).";
+        }
+    
+}
+
+let mySetList = [100, 210, 165,];
+let maxAllowedTime = 600;
+
+console.log(calculateTotalRuntime(mySetList, maxAllowedTime));
+
+let extendedSetList = [180, 210, 165, 240];
+console.log(calculateTotalRuntime(extendedSetList, maxAllowedTime));
 
 
 
