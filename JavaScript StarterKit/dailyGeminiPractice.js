@@ -1274,7 +1274,64 @@ console.log(calculateTotalRuntime(mySetList, maxAllowedTime));
 
 let extendedSetList = [180, 210, 165, 240];
 console.log(calculateTotalRuntime(extendedSetList, maxAllowedTime));
+// July 26th Practice (Day 80): The E-Commerce Product Tag Filter(Array Filtering & Dynamic Creation)
+function filterProductsByTag(productTags, targetCatagory) {
+    let matchedProducts = [];
+    for (let tag of productTags) {
+        if (tag.includes(targetCatagory)) {
+            matchedProducts.push(tag);
+        }
+    }
+    return matchedProducts;
+}
 
+let inventoryTags = [
+    "Apparel: Heavyweight Hoodie",
+    "Accessory: Trucker Cap",
+    "Apparel: Graphic Tee",
+    "Footwear: Leather Boots",
+    "Accessory: Silver Chain"
+];
+
+console.log("Apparel Filter:", filterProductsByTag(inventoryTags, "Apparel"));
+
+console.log("Accessory Filter:", filterProductsByTag(inventoryTags, "Accessory"));
+
+// July 26th Practice (Day 81): The Live Stream Frame Rate Drop Detector(Array Threshold Filtering & Ratio Analysis)
+function analyzeStreamPerformance(fpsLogs, minimumFPS) {
+    let lagSpikeCount = 0;
+    for (let fpsValue of fpsLogs) {
+        if (fpsValue < minimumFPS) {
+            lagSpikeCount++;
+        }
+        
+    }
+    if (lagSpikeCount === 0) {
+            return "Stream Pristine: 0 lag spkes detected across " + fpsLogs.length + " logged samples.";
+        } else {
+            return "Performance Alert: " + lagSpikeCount + " lag spike(s) detected below " + minimumFPS + " FPS.";
+        }
+}
+let targetFrameFloor = 30;
+let smoothStream = [60, 59, 60, 58, 60, 60];
+console.log(analyzeStreamPerformance(smoothStream, targetFrameFloor));
+
+let choppyStream = [60, 58, 22, 60, 15, 59, 60];
+console.log(analyzeStreamPerformance(choppyStream, targetFrameFloor));
+
+// July 27th Practice(Day 82): The Fashion Show Runway Queue Rotator(Array Shift & Push Rotation)
+function rotateRunwayQueue(modelLineup) {
+    if (modelLineup.length === 0) {
+        return "Queue Empty: No models available to rotate.";
+    }
+        let leadModel = modelLineup.shift();
+        modelLineup.push(leadModel);
+        return "Rotation Complete: " + leadModel + " moved to the back. New lead on stage is " + modelLineup[0] + ".";
+    
+}
+let currentLineup = ["Wyntress", "Will", "Dom", "Serena"];
+console.log(rotateRunwayQueue(currentLineup));
+console.log("Updated Lineup State:", currentLineup);
 
 
 
