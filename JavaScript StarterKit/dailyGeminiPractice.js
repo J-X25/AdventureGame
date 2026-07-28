@@ -1333,6 +1333,25 @@ let currentLineup = ["Wyntress", "Will", "Dom", "Serena"];
 console.log(rotateRunwayQueue(currentLineup));
 console.log("Updated Lineup State:", currentLineup);
 
+// July 28 Practice(Day83): The Audio Vocal Take Ranker(Array Min/Max & Range Calculation)
+function analyzeVocalTakes(takeScores) {
+    if (takeScores.length === 0) {
+        return "Session Error: No vocal take scores logged.";
+    }
+        let highestScore = Math.max(...takeScores);
+        let lowestScore = Math.min(...takeScores);
+        let scoreVariance = highestScore - lowestScore;
+        return "Session Summary: Peak Take is " + highestScore + ", Floor Take is " + lowestScore + " (Variance: " + scoreVariance + " pts).";
+    
+}
+
+let studioSession1 = [82, 95, 88, 74, 91];
+console.log(analyzeVocalTakes(studioSession1));
+
+let emptySession = [];
+console.log(analyzeVocalTakes(emptySession));
+
+
 
 
 
