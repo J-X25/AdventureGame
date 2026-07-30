@@ -1351,6 +1351,30 @@ console.log(analyzeVocalTakes(studioSession1));
 let emptySession = [];
 console.log(analyzeVocalTakes(emptySession));
 
+// July 29th Practice(Day 84): The Merchanct Inventory Variance Audit(Cross Array Difference Inspection)
+function auditInventoryVariance(expectedItems, scannedItems) {
+    let missingItems = [];
+    for (let sku of expectedItems) {
+        if (!scannedItems.includes(sku)) {
+            missingItems.push(sku);
+        }
+    }
+    if (missingItems.length === 0) {
+        return "Audit Clean: All expected items physically accounted for.";
+    } else {
+        return "Variance Detected: " + missingItems.length + " items(s) missing: " + missingItems.join(", ") + ".";
+    }
+}
+
+let manifest = ["JACKET-BLK-L", "TEE-WHT-M", "DENIM-BLUE-32", "HAT-RED-OS"];
+//Test A
+let partialScan = ["JACKET-BLK-L", "HAT-RED'OS"];
+console.log(auditInventoryVariance(manifest, partialScan));
+
+//Test B
+let fullScan = ["JACKET-BLK-L", "TEE-WHT-M", "DENIM-BLUE-32", "HAT-RED-OS"];
+console.log(auditInventoryVariance(manifest, fullScan));
+
 
 
 
