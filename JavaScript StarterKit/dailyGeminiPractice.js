@@ -1375,6 +1375,50 @@ console.log(auditInventoryVariance(manifest, partialScan));
 let fullScan = ["JACKET-BLK-L", "TEE-WHT-M", "DENIM-BLUE-32", "HAT-RED-OS"];
 console.log(auditInventoryVariance(manifest, fullScan));
 
+// July 30th Practice(Day 85): The Audio Loop BPM Tempo Clamping Engine(Array Mapping & Boundary Clamping)
+function clampBpmTempoList(bpmList, minBpm, maxBpm) {
+    let clampedList = [];
+    for (let bpm of bpmList) {
+        if (bpm < minBpm) {
+            clampedList.push(minBpm);
+        } 
+        else if (bpm > maxBpm) {
+            clampedList.push(maxBpm);
+        } else {
+            clampedList.push(bpm);
+        }
+    }
+    return clampedList;
+}
+
+let rawAudioTempos = [55, 92, 140, 185, 70, 165];
+let minFloor = 70;
+let maxCeiling = 160;
+
+let sanitizedTempos = clampBpmTempoList(rawAudioTempos, minFloor, maxCeiling);
+
+console.log("Original Tempos: ", rawAudioTempos);
+console.log("Sanitised Tempos:", sanitizedTempos);
+
+// July 31st Practice(Day 86): The Web Asset Gallery Paginated Slicer(Array Slicing & Page Range Indexing)
+function getPageItems(itemsArray, pageNumber, pageSize) {
+    let startIndex = (pageNumber - 1) * pageSize;
+    let endIndex = startIndex + pageSize;
+    if (startIndex < 0 || startIndex >= itemsArray.length) {
+        return [];
+    }
+    let pageSubset = itemsArray.slice(startIndex, endIndex);
+    return pageSubset;
+}
+
+let galleryAssets = ["Banner_1", "Logo_Main", "Card_Front", "Card_Back", "Footer_Icon"];
+let itemsPerPage = 2;
+
+console.log("Page 1:", getPageItems(galleryAssets, 1, itemsPerPage));
+console.log("Page 2:", getPageItems(galleryAssets, 2, itemsPerPage));
+console.log("Page 3:", getPageItems(galleryAssets, 3, itemsPerPage));
+console.log("Page 4:", getPageItems(galleryAssets, 4, itemsPerPage));
+
 
 
 
