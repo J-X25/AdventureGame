@@ -1419,6 +1419,59 @@ console.log("Page 2:", getPageItems(galleryAssets, 2, itemsPerPage));
 console.log("Page 3:", getPageItems(galleryAssets, 3, itemsPerPage));
 console.log("Page 4:", getPageItems(galleryAssets, 4, itemsPerPage));
 
+// August 1st Practice(Day 87): The Single Release Stream Analyzer(Array Averaging & Milestone Thresholds)
+function analyzeReleasePerformance(dailyStreams, targetAverage) {
+    if (dailyStreams.length === 0) {
+        return "Data Error: No stream logs available for analysis.";
+    }
+    let totalStreams = 0;
+    for (let streams of dailyStreams) {
+        totalStreams += streams;
+    }
+    let averageStreams = Math.round(totalStreams / dailyStreams.length);
+    if (averageStreams >= targetAverage) {
+        return "Campaign Success: Averaged " + averageStreams + " streams/day (Target: " + targetAverage + ").";
+    } else {
+        let shortfall = targetAverage - averageStreams;
+        return "Under Target: Averaged " + averageStreams + " streams/day (Short by " + shortfall + ").";
+    }
+}
+
+let targetGoal = 1500;
+
+// Test A: Strong Campaign
+let launchWeekStreams = [1200, 1500, 1800, 2100, 2400];
+console.log(analyzeReleasePerformance(launchWeekStreams, targetGoal));
+
+// Test B: Slow Start
+let quietWeekStreams =  [800, 950, 1100, 1200];
+console.log(analyzeReleasePerformance(quietWeekStreams, targetGoal));
+
+// August 2nd Practice(Day 88): The Multi-Format Media Asset Depuplicator(Array Deduplication & First-Seen Indexing)
+function deduplicateMediaAssets(assetList) {
+    let uniqueAssets = [];
+    for (let fileName of assetList) {
+        if (!uniqueAssets.includes(fileName)) {
+            uniqueAssets.push(fileName); 
+        }
+    }
+    return uniqueAssets; 
+}
+
+let rawUploads = [
+    "cover_art.jpg",
+    "vocal_stem.wav",
+    "cover_art.jpg",
+    "press_kit.pdf",
+    "vocal_stem.wav"
+];
+
+let cleanQueue = deduplicateMediaAssets(rawUploads);
+
+console.log("Raw Upload Count:  ", rawUploads.length);
+console.log("Sanitized Uploads:  ", cleanQueue);
+console.log("Unique File Count:  ", cleanQueue.length);
+
 
 
 
