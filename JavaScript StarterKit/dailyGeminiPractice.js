@@ -1472,6 +1472,27 @@ console.log("Raw Upload Count:  ", rawUploads.length);
 console.log("Sanitized Uploads:  ", cleanQueue);
 console.log("Unique File Count:  ", cleanQueue.length);
 
+// August 3rd Practice(Day 89): The Audio Track Stems Reorder Engine(Array Index Placement & Splice Mutations)
+function reorderAudioStems(stemsList, fromIndex, toIndex) {
+    if (fromIndex < 0 || fromIndex >= stemsList.length ||
+         toIndex < 0 || toIndex >= stemsList.length
+        ) {
+        return "Invalid Reorder Request: Index out of bounds.";
+    }
+        let movedStem = stemsList.splice(fromIndex, 1)[0];
+        stemsList.splice(toIndex, 0, movedStem);
+        return stemsList;
+    
+}
+
+let myStems = ["Drums", "Vocals", "Bass", "Guitars"];
+
+// Move Vocals from index 1 to the end of the list (index 3)
+console.log("Reordered Stems:", reorderAudioStems(myStems, 1, 3));
+
+// Test Out-Of-Bounds Index
+console.log(reorderAudioStems(myStems, 0, 10));
+
 
 
 
