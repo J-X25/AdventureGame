@@ -1493,6 +1493,50 @@ console.log("Reordered Stems:", reorderAudioStems(myStems, 1, 3));
 // Test Out-Of-Bounds Index
 console.log(reorderAudioStems(myStems, 0, 10));
 
+// August 4th Practice(Day 90): The Audio Track Crossfade Time Interpolator(Linear Mapping & Step Calculation)
+function generateCrossfadeRamp(startVolume, endVolume, totalSteps) {
+    if (totalSteps <= 1) {
+        return "Transition Error: Step count must be at least 2.";
+    }
+        let volumeRamp = [];
+        let stepSize = (endVolume - startVolume) / (totalSteps - 1);
+        for (let i = 0; i < totalSteps; i++) {
+            let currentLevel = Math.round(startVolume + (i * stepSize));
+            volumeRamp.push(currentLevel);
+        }
+    
+    return volumeRamp;
+}
+
+// Test Case A: Fade-In (0 to 100 in 5 steps)
+console.log("Fade-In Ramp: ", generateCrossfadeRamp(0, 100, 5));
+
+// Test Case B: Fade-Out (80 to 20 in 4 steps)
+console.log("Fade-Out Ramp: ", generateCrossfadeRamp(80, 20, 4));
+
+// August 5 Practice (Day 91): The Audio Stem Mute/Solo State Filter(Boolean Array Masking)
+function filterActiveAudioStems(stems, activeStates) {
+    if (stems.length !== activeStates.length) {
+        return "Config Error: Mismatch between stems and active states.";
+    }
+        let activeStems = [];
+        for (let i = 0; i < stems.length; i++) {
+            if (activeStates[i] === true) {
+                activeStems.push(stems[i]);
+            }
+        }
+    
+    return activeStems;
+}
+
+let trackList = ["Drums", "Vocals", "Bass", "Synths", "FX"];
+let muteMask = [true, false, true, true, false];
+
+console.log("Active Audio Bus:", filterActiveAudioStems(trackList, muteMask));
+
+// Mismatched Array Length Guard
+console.log(filterActiveAudioStems(["Drums", "Vocals"], [true]));
+
 
 
 
