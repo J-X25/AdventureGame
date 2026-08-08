@@ -1537,8 +1537,23 @@ console.log("Active Audio Bus:", filterActiveAudioStems(trackList, muteMask));
 // Mismatched Array Length Guard
 console.log(filterActiveAudioStems(["Drums", "Vocals"], [true]));
 
+// August 6th Practice (Day 92): The Digital Audio Playlist Shuffler (Fisher-Yates Array Randomization)
+function shufflePlaylist(trackList) {
+    if (trackList.length <= 1) {
+        return trackList;
+    }
+    let shuffled = [...trackList];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+let masterAlbum = ["01_Intro.wav", "02_Single.mp3", "03_Interlude.wav", "04_Outro.mp3"];
+console.log("Original Order:", masterAlbum);
 
-
+let randomizedQueue = shufflePlaylist(masterAlbum);
+console.log("Shuffled Queue:", randomizedQueue);
 
 
             
