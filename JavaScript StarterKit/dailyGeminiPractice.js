@@ -1555,9 +1555,79 @@ console.log("Original Order:", masterAlbum);
 let randomizedQueue = shufflePlaylist(masterAlbum);
 console.log("Shuffled Queue:", randomizedQueue);
 
+// August 7th Practice (Day 93): The Dynamic Event Landing Page Countdown Timer(Time Unit Formatting & String Padding)
+function formatCountdownTime(totalSeconds) {
+    if (totalSeconds < 0) {
+        return "Invalid Time: Input must be a positive number of seconds.";
+    }
+        let hours = Math.floor(totalSeconds / 3600);
+        let remainingAfterHours = totalSeconds % 3600;
+        let minutes = Math.floor(remainingAfterHours / 60);
+        let seconds = remainingAfterHours % 60;
 
-            
-        
+        let paddedHours   = String(hours).padStart(2, "0");
+  let paddedMinutes = String(minutes).padStart(2, "0");
+  let paddedSeconds = String(seconds).padStart(2, "0");
+
+  return paddedHours + ":" + paddedMinutes + ":" + paddedSeconds;
+    
+}
+
+// Test Case A: Standard Event Timer (3725 seconds)
+console.log("Broadcast Starting In:", formatCountdownTime(3725));
+// Test Case B: Short Timer (90 seconds)
+console.log("Show Intro Starting In:", formatCountdownTime(90));
+// Test Case C: Zero Seconds
+console.log("Stream Status:", formatCountdownTime(0));
+
+// August 8th Practice (Day 94): The Live Event Stream Viewer Access Auditor (Range Boundaries & Binary Array Flagging)
+function auditStreamAccess(userTiers, minAllowedTier, maxAllowedTier) {
+    if (userTiers.length === 0) {
+        return [];
+    }
+    let accessFlags = [];
+    for (let tier of userTiers) {
+        if (tier >= minAllowedTier && tier <= maxAllowedTier) {
+            accessFlags.push(true);
+        } else {
+            accessFlags.push(false);
+        }
+    }
+    return accessFlags;
+}
+let streamQueue = [150, 200, 275, 399, 401, 500];
+let passMin = 200;
+let passMax = 400;
+
+let auditResults = auditStreamAccess(streamQueue, passMin, passMax);
+console.log("User Tier IDs:  ", streamQueue);
+console.log("Access Granted?: ", auditResults);
+
+// August 9th Practice (Day 95): The Live Broadcast Audio Peak Indicator (Array Peak Detection & Status Mapping)
+function mapAudioPeakStatus(peakLevels, clipThreshold) {
+    if (peakLevels.length === 0) {
+        return [];
+    }
+    let statusList = [];
+    for (let level of peakLevels) {
+        if (level >= clipThreshold) {
+            statusList.push("CLIP");
+        } else {
+            statusList.push("OK");
+        }
+    }
+    return statusList;
+}
+
+let liveInputBus = [-18, -10, -3, 0, 4, -12];
+let maxSafeLevel = 0;
+
+let meterDisplay = mapAudioPeakStatus(liveInputBus, maxSafeLevel);
+
+console.log("Channel Peaks:  ", liveInputBus);
+console.log("Meter Indicators:", meterDisplay);
+
+// August 10th Practice (Day 96)
 
 
 
