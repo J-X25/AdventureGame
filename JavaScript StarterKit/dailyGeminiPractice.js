@@ -1627,7 +1627,25 @@ let meterDisplay = mapAudioPeakStatus(liveInputBus, maxSafeLevel);
 console.log("Channel Peaks:  ", liveInputBus);
 console.log("Meter Indicators:", meterDisplay);
 
-// August 10th Practice (Day 96)
+// August 10th Practice (Day 96): The E-commerce Discount Code Validator(Array Inspection & Multi-Condition Logic)
+function validateAndApplyDiscount(promoCode, cartTotal, activeCodes) {
+    if (!activeCodes.includes(promoCode)) {
+        return "Invalid Code: Promo code not recognized";
+    }
+    if (cartTotal < 50) {
+        return "Promo Ineligible: Minimum cart totalof $50 required";
+    }
+    let finalTotal = cartTotal -10;
+    return "Discount Applied: New Cart total is $" + finalTotal + ".";
+}
+
+let currentPromos = ["SAVE10", "VIP20", "FREESHIP"];
+// Test A
+console.log(validateAndApplyDiscount("SAVE10", 80, currentPromos));
+// Test B
+console.log(validateAndApplyDiscount("SAVE10", 35, currentPromos));
+// Test C
+console.log(validateAndApplyDiscount("EXPIRED100", 120, currentPromos));
 
 
 
