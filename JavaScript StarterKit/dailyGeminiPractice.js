@@ -1647,6 +1647,30 @@ console.log(validateAndApplyDiscount("SAVE10", 35, currentPromos));
 // Test C
 console.log(validateAndApplyDiscount("EXPIRED100", 120, currentPromos));
 
+// August 11th (Day 97): The Media Player Playback Speed Normalizer(Array Filtering and Range Clamping)
+function normalizePlaybackSpeeds(requestedSpeeds, minSpeed, maxSpeed) {
+    if (requestedSpeeds.length === 0) {
+        return [];
+    }
+    let validSpeeds = [];
+    for (let speed of requestedSpeeds) {
+        if (speed >= minSpeed && speed <= maxSpeed) {
+            validSpeeds.push(speed);
+        }
+    }
+    return validSpeeds = [];
+}
+
+let userPresets = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0];
+let lowestAllowed = 0.5;
+let highestAllowed = 2.0;
+
+let safePresets = normalizePlaybackSpeeds(userPresets, lowestAllowed, highestAllowed);
+
+console.log("Requested Presets:", userPresets);
+console.log("Allowed Presets:  ", safePresets);
+
+
 
 
 
