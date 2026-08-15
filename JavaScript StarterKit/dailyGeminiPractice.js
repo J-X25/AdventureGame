@@ -1670,6 +1670,76 @@ let safePresets = normalizePlaybackSpeeds(userPresets, lowestAllowed, highestAll
 console.log("Requested Presets:", userPresets);
 console.log("Allowed Presets:  ", safePresets);
 
+// August 12th Practice (Day 98): The Custom Merchandise Print Layout Matrix (2d Array Grid Coordinate Mapping)
+function getPrintGridPostion(gridMatrix, rowIndex, colIndex) {
+    if (
+        rowIndex < 0 ||
+        rowIndex >= gridMatrix.length ||
+        colIndex < 0 ||
+        colIndex >= gridMatrix[rowIndex].length 
+    ) {
+        return "Placement Error: Target coordinates are out of bounds.";
+    }
+    let assetLabel = gridMatrix[rowIndex][colIndex];
+
+    return "Target Postition (" + rowIndex + ", " + colIndex + "): " + assetLabel + ".";
+}
+
+let tShirtPrintGrid = [
+    ["Top-Left-Pocket", "Neck-Tag",      "Top-Right-Shoulder"],
+    ["Left-Sleeve",     "Chest-Graphic", "Right-Sleeve"],
+    ["Bottom-Left-Hem", "Hem-Label",      "Bottom-Right-Hem"]
+];
+
+// Test Case A: Valid Center Chest Lookup (Row 1, Col 1)
+console.log(getPrintGridPostion(tShirtPrintGrid, 1, 1));
+
+// Test Case B: Valid Hem Lookup (Row 2, Col 0)
+console.log(getPrintGridPostion(tShirtPrintGrid, 2, 0));
+
+// Test Case C: Out-of-Bounds Coordinate Request
+console.log(getPrintGridPostion(tShirtPrintGrid, 4, 1));
+
+// August 13th Practice (Day 99): The Live Stream Chat Message Spam Filter(Sub-string Inspection & Keyword Censorship)
+function filterSpamMessages(chatMessages, spamKeyword) {
+    if (chatMessages.length === 0) {
+        return [];
+    }
+    let cleanChat = [];
+    let lowerKeyword = spamKeyword.toLowerCase();
+    for (let message of chatMessages) {
+        let lowerMessage = message.toLowerCase();
+
+        if (!lowerMessage.includes(lowerKeyword)) {
+            cleanChat.push(message);
+        }
+    }
+    return cleanChat;
+}
+
+let liveStreamChat = [
+  "Yo this transition is crazy!!",
+  "Go to SPAMLINK.com for free promo",
+  "What DAW are you using for this track?",
+  "get cheap plays at SpamLink now!",
+  "Drop the sound kit link please!"
+];
+
+let bannedTerm = "spamlink";
+
+let moderatedFeed2 = filterSpamMessages(liveStreamChat, bannedTerm);
+
+console.log("Raw Messages Received: ", liveStreamChat.length); // 5
+console.log("Approved Messages:     ", moderatedFeed);
+/* Expected Output:
+   Approved Messages: [
+     'Yo this transition is crazy!!',
+     'What DAW are you using for this track?',
+     'Drop the sound kit link please!'
+   ] 🎉
+*/
+console.log("Clean Feed Count:      ", moderatedFeed.length); // 3
+
 
 
 
