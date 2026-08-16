@@ -1740,6 +1740,61 @@ console.log("Approved Messages:     ", moderatedFeed);
 */
 console.log("Clean Feed Count:      ", moderatedFeed.length); // 3
 
+// August 14th Practice(Day 100): The Master Track Audio Gain Normalizer & Headroom Limiter(Array Scaling & Dynamic Threshold)
+function masterAudioLimiter(amplitudes, gainMultiplier, maxCeiling) {
+    if (amplitudes.length === 0) {
+        return [];
+    }
+    let masteredTrack = [];
+    for (let signal of amplitudes) {
+        let boosted = signal * gainMultiplier;
+        if (boosted > maxCeiling) {
+
+        finalSignal = maxCeiling;
+    } else {
+        finalSignal = boosted;
+    }
+    masteredTrack.push(Number(finalSignal.toFixed(2)));
+    }
+    return masteredTrack;
+}
+
+let rawSignals = [0.2, 0.45, 0.7, 0.9, 0.35];
+let boost = 1.4;
+let ceiling = 1.0;
+
+let finalMaster = masterAudioLimiter(rawSignals, boost, ceiling);
+
+console.log("Raw Waveform Signals: ", rawSignals);
+console.log("Mastered Audio Output:", finalMaster);
+
+// August 15th Practice(Day 101): The Multi-Format Asset File Extention Extractor(String Splitting & Array Mapping)
+function extractFileExtentions(fileNames) {
+    if (fileNames.length === 0) {
+        return [];
+    }
+    let extentions = [];
+    for (let fileName of fileNames) {
+        let parts = fileName.split(".");
+        let rawExtention = parts[parts.length - 1];
+
+        let cleanExtention = rawExtention.toLowerCase();
+        extentions.push(cleanExtention);
+    }
+    return extentions;
+}
+
+let mediaUploads = [
+    "album_artwork.PNG",
+    "master_track.final.WAV",
+    "press_release.PDF",
+    "social_clip.mp4"
+];
+
+let detectedExtentions = extractFileExtentions(mediaUploads);
+
+console.log("Uploaded Files:    ", mediaUploads);
+console.log("Extracted Extentions:", detectedExtentions);
 
 
 
